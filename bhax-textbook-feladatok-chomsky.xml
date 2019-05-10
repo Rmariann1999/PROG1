@@ -1,0 +1,309 @@
+
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Chomsky!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        <title>Decimálisból unárisba átváltó Turing gép</title>
+        <para>
+            Állapotátmenet gráfjával megadva írd meg ezt a gépet!
+        </para>
+     <mediaobject>
+            <imageobject>
+                <imagedata fileref="turing.png" scale="30" />
+            </imageobject>
+        </mediaobject>
+              <para>
+            A feladatom egy decimális ,azaz tízes számrendszerből egy unáris, azaz egyes számrendszerbe váltó gép írása.
+            Az unáris a legegysezreűbb számrendszer amely a természetes számok ábrázolására szolgál. A célja hogy egy szám beírása után annyi vonal jelenjen meg amennyi maga a szám értéke.
+            A következő Turing gépben a vonalak helyett 1-esek fognak megjelenni. Működési elve hogy a számok beolvasása után ha talál egyenlőségjelet akkor az előtte lévő számból kivon 1-et, amíg az 0 nem lesz. Minden kivont 1-es után kiír egy vonalat (esetünkben egy 1-est). A végső sorozatban az egyesek számának pontosan meg kell egyezni a a megadott szám értékével.Az itt látható programban minden 5 darab 1-es után szóköz jelenik meg de ez nem számít egy kivont értéknek.
+        </para>
+    
+        <programlisting language="c++"><![CDATA[
+#include <iostream>
+using namespace std;
+int main() {
+    int szam;
+    int szamlalo = 0;
+    
+    cout << "Adj meg egy számot!\n";
+    cin >> szam;
+    cout << "Unáris számrendszerben:\n";
+    
+    for(int i = 0; i < szam; ++i) {
+        cout << "1";
+        ++szamlalo;
+        if(szamlalo%5 == 0)
+            cout << " ";
+    }
+    cout << '\n';
+    return 0;
+}      
+
+ ]]></programlisting>
+
+<para>
+    A következő képen a kód tesztelése látható:
+</para>
+   <mediaobject>
+            <imageobject>
+                <imagedata fileref="turinggep.png" scale="40" />
+            </imageobject>
+        </mediaobject>
+ </section>   
+ <section>
+        <title>Az a<superscript>n</superscript>b<superscript>n</superscript>c<superscript>n</superscript> nyelv nem környezetfüggetlen</title>
+        <para>
+            Mutass be legalább két környezetfüggő generatív grammatikát, amely ezt a nyelvet generálja!
+        </para>
+        <para>
+     Első előadás feladat passzolása
+        </para>
+    </section>
+ <section>
+
+        <title>Hivatkozási nyelv</title>
+        <para>
+            A C nyelvnek rengeteg szabványa van,de leggyakrabban a C18-as szabványt használjuk. Mivel több verzió van ezért van hogy az egyik verzióban megírt program nem biztos hogy kompatibilis lesz a másik verzió fordítójával.Például a  C89-es szabványban a for ciklus fejében deklarált változót a fordító nem fordítja le, valamint a // kommentjelet sem ismeri ezért a /**/ komment jelölést kell használni és a printf függvény itt sprintként ismert.
+        </para>
+    
+        <programlisting>
+            <![CDATA[
+                #include <stdio.h>
+                #include <math.h>
+                int main () 
+                {
+                   char str[80];
+                   sprintf(str, "A Pi értéke: %f", M_PI);
+                   puts(str);
+                   return(0);   
+                }    //Ez a program kiírja a standard kimenetre a pi értékét
+            ]]>
+        </programlisting>
+    </section>                     
+
+    <section>
+        <title>Saját lexikális elemző</title>
+        <para>
+            Lexikális elemzőre főként akkor van szükségünk hogyha nagyon adattömeggel dolgozunk. Egy elemzővel könyebben kinyerhetők statisztikai adatok,szavakat tudunk osztályozni és például grafikus ábrázolásra is alkalmas.
+        </para>
+       
+        <programlisting>
+            <![CDATA[
+            import nltk
+            from nltk.tokenize import word_tokenize
+            text = open('elemzo.txt').read()
+            tokens = word_tokenize(text)
+            digit_count = len(set(word for word in tokens if word.isdigit()))
+            print('The number of digits in the text: ')
+            print(digit_count)
+            ]]>
+        </programlisting>
+        <para>Miután az elem.txt tartalmát odaadtuk a text változónak szavakra bontjuk a stringet és megkeressük azokat a stringeket amik csak számból állnak.A set függvény miatt azokat a megegyező (duplikált) stringeket csak egynek veszi.  Ezután a len() függvénnyel megkapjuk a számból álló stringek számát melyet beleírunk a digit_count változóba.A végén pedig printf-el kiíratjuk az eredményt.
+        </para>
+    
+    </section>                     
+
+    <section>
+        <title>l33t.l</title>
+        <para>
+            Egy új írási mód terjedt el a 80-as években annak érdekében hogy bizonyos fájlokra kulcsszavas keresés során nehezebb legyen rátalálni.Ekkor az ABC betűit olyan karakterekre cserélték amellyel a szöveg olvasható maradt,de nehezebben megtalálható. Például az A betűt 4-esre cserélték vagy a C-t nyitó zárójelre. Ezt az írásmódot, leetspeak-nek nevezték el.
+        </para>
+        <para>
+            A következő egy példa az 1337-es kódolóra.
+        </para>
+        <programlisting>
+            <![CDATA[
+            import nltk
+            text = open('text.txt').read()
+            text = text.lower()
+            text = text.replace('a', '4')
+            text = text.replace('b', '8')
+            text = text.replace('c', '(')
+            text = text.replace('e', '3')
+            text = text.replace('g', '6')
+            text = text.replace('i', '1')
+            text = text.replace('l', '|')
+            text = text.replace('o', '0')
+            text = text.replace('s', '5')
+            text = text.replace('t', '7')
+            text = text.replace('x', '8')
+            text = text.replace('z', '2')
+            print(text)
+            ]]>
+        </programlisting>
+        <para>Az előző program pythonban íródott .Először importáljuk az nltk könyvtárat.A kódunk a kapott inputban kicseréli a betűket a megadott karakterekre, majd ezeket elmenti és a printf segítségével megjeleníti az outouton. Erre példa: "informatika -> 1nf0rm471k4"
+        </para>
+    </section>                     
+
+
+    <section>
+        <title>A források olvasása</title>
+        <para>
+            Hogyan olvasod, hogyan értelmezed természetes nyelven az alábbi kódcsipeteket? Például
+            <programlisting><![CDATA[if(signal(SIGINT, jelkezelo)==SIG_IGN)
+    signal(SIGINT, SIG_IGN);]]></programlisting>
+            Ha a SIGINT jel kezelése figyelmen kívül volt hagyva, akkor ezen túl is legyen
+            figyelmen kívül hagyva, ha nem volt figyelmen kívül hagyva, akkor a jelkezelo függvény
+            kezelje. (Miután a <command>man 7 signal</command> lapon megismertem a SIGINT jelet, a
+            <command>man 2 signal</command> lapon pedig a használt rendszerhívást.)
+        </para>
+
+        <caution>
+            <title>Bugok</title>
+            <para>
+                Vigyázz, sok csipet kerülendő, mert bugokat visz a kódba! Melyek ezek és miért? 
+                Ha nem megy ránézésre, elkapja valamelyiket esetleg a splint vagy a frama?
+            </para>
+        </caution>
+            
+                <programlisting><![CDATA[for(i=0; i<5; ++i)]]></programlisting>            
+            <para>
+                Egy for ciklus, melyben a változó értékét 4-ig növelem. A ++i-vel a változó értéke mindig eggyel nő.
+            </para>     
+                <programlisting><![CDATA[for(i=0; i<5; i++)]]></programlisting>      
+            <para>
+              Egy for ciklus, melyben a változó értékét 4-ig növelem. A i++-al a változó értéke mindig eggyel nő. Ha egy kifejezésben csak egy változó szerepel, akkor használhatjuk a ++i-t és az i++-ot is,de kifejezés kiértékelésénél már számít melyiket használjuk. 
+            </para>
+                <programlisting><![CDATA[for(i=0; i<5; tomb[i] = i++)]]></programlisting>            
+            <para>
+                Egy for ciklus 0-tól 4-ig,de a végrehajtás sorrendje hibás, mert értékadás történik az i változó növelésénél.
+            </para>
+                <programlisting><![CDATA[for(i=0; i<n && (*d++ = *s++); ++i)]]></programlisting>                                      
+            <para>
+                For ciklus, mely n-szer fut le és a d pointer értékét odaadja az s pointernek, majd növeli a változók értékét
+            </para> 
+                <programlisting><![CDATA[printf("%d %d", f(a, ++a), f(++a, a));]]></programlisting>                           
+            <para>
+                A printf-el az outputra kiírunk két fügvényvisszatérési értéket. De ez nem ajánlott mert nem tudhatjuk melyik fog előbb lefutni és melyik érték melyik függvényhez tartozik.
+            </para> 
+                <programlisting><![CDATA[printf("%d %d", f(a), a);]]></programlisting>            
+            <para>
+                Kiíratjunk az outputra decimális formában az f(a) függvény visszatérési értékét és az a változót. 
+            </para>
+                <programlisting><![CDATA[printf("%d %d", f(&a), a);]]></programlisting>            
+            <para>
+               Kiíratjunk az outputra decimális formában az f(a) függvény visszatérési értékének referenciáját és az a változót. 
+            </para>  
+    </section>                     
+
+    <section>
+        <title>Logikus</title>
+        <para>
+            Hogyan olvasod természetes nyelven az alábbi Ar nyelvű formulákat?
+        </para>
+        <programlisting language="tex"><![CDATA[
+            $(\forall x \exists y ((x<y)\wedge(y \text{ prím})))$ 
+            $(\forall x \exists y ((x<y)\wedge(y \text{ prím})\wedge(SSy \text{ prím})))$ 
+            $(\exists y \forall x (x \text{ prím}) \supset (x<y)) $ 
+            $(\exists y \forall x (y<x) \supset \neg (x \text{ prím}))$
+]]></programlisting>        
+        <para>
+            I. Minden x-re létezik olyan y, amely nagyobb nála és egy prímszám.
+        </para>
+        <para>
+            II. Minden x-re létezik olyan y, amely nagyobb nála, és y is és y+2 is egy prímszám.
+        </para>
+        <para>
+            III. Minden x-re létezik olyan y , hogy x prím, ha x kisebb y-nál.
+        </para>
+        <para>
+            IV. Minden x-re létezik olyan y, amely kisebb nála ha x nem prím.
+        </para>
+    </section>                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+    <section>
+        <title>Deklaráció</title>
+            
+        <para>
+            Vezesd be egy programba (forduljon le) a következőket: 
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>egész</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutató</para>                        
+            </listitem>
+            <listitem>
+                <para>egész referenciája</para>                        
+            </listitem>
+            <listitem>
+                <para>egészek tömbje</para>                        
+            </listitem>
+            <listitem>
+                <para>egészek tömbjének referenciája (nem az első elemé)</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatók tömbje</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatót visszaadó függvény</para>                        
+            </listitem>
+            <listitem>
+                <para>egészre mutató mutatót visszaadó függvényre mutató mutató</para>                        
+            </listitem>
+            <listitem>
+                <para>egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvény</para>                        
+            </listitem>            
+            <listitem>
+                <para>függvénymutató egy egészet visszaadó és két egészet kapó függvényre mutató mutatót visszaadó, egészet kapó függvényre</para>                        
+            </listitem>            
+        </itemizedlist>            
+
+       <para>
+            Mit vezetnek be a programba a következő nevek?
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <programlisting><![CDATA[int a;]]></programlisting> 
+                <para>Egész típusú változó.</para>           
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *b = &a;]]></programlisting>    
+                <para>Egész típusú változóra mutató pointer.</para>         
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int &r = a;]]></programlisting>  
+                <para>Egy egész típusú referencia, mely megkapja a értékét.</para>           
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int c[5];]]></programlisting> 
+                <para>Egy 5 elemű tömb mely egészeket tartalmaz.</para>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int (&tr)[5] = c;]]></programlisting> 
+                <para>Egy ötelemű tömb referenciája mely a c tömb címére hivatkozik.</para>            
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *d[5];]]></programlisting>     
+                <para>5 elemű tömb, mely pointereket tartalmaz.</para>       
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *h ();]]></programlisting>    
+                <para>Függvény, melynek a visszatérérsi érteke egy pointer.</para>        
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int *(*l) ();]]></programlisting>  
+                <para>Egy pointer mutat egy mutató pointert visszaadó függvényre.</para>          
+            </listitem>
+            <listitem>
+                <programlisting><![CDATA[int (*v (int c)) (int a, int b)]]></programlisting>      
+                <para>Függvény, melynek ha megadunk két értéket, visszaad egy egész típusú változót, majd visszatér a változóra mutató pointerrel.</para>      
+            </listitem>            
+            <listitem>
+                <programlisting><![CDATA[int (*(*z) (int)) (int, int);]]></programlisting>       
+                <para> </para>     
+            </listitem>       
+        </itemizedlist>       
+        <para>
+        Mivel az előző kódok referenciák ezért a g++ paranccsal fordíthatóak.
+        </para>
+    </section>                     
+
+                                                                                                                                                                                                                                                                </chapter> 

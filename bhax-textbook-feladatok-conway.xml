@@ -1,0 +1,310 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Conway!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+    </info>
+    <section>
+        
+        <title>Hangyaszimulációk</title>
+        <para>
+            Írj Qt C++-ban egy hangyaszimulációs programot, a forrásaidról utólag reverse engineering jelleggel
+            készíts UML osztálydiagramot is!
+        </para>
+        <para> 3. labor passzolási lehetőség </para>
+        
+    </section>  
+    
+    <section>
+        <title>Java életjáték</title>
+        <para>
+            Írd meg Java-ban a John Horton Conway-féle életjátékot, 
+            valósítsa meg a sikló-kilövőt!
+        </para>
+        <para>
+            A John Horton Conway féle életjáték szabályai a következők : A sejtek cellákban élnek(crllánként 1 sejt).Egy sejt akkor él ha van 2 vagy 3 szomszédja , különben meghal. ha meghalt egy sejt addig halott is marad amig pont 3 szomszédja van.
+
+        </para>
+            <programlisting language="java"><![CDATA[
+        
+public void időFejlődés() {
+        
+        boolean [][] rácsElőtte = rácsok[rácsIndex];
+        boolean [][] rácsUtána = rácsok[(rácsIndex+1)%2];
+        
+        for(int i=0; i<rácsElőtte.length; ++i) { // sorok
+            for(int j=0; j<rácsElőtte[0].length; ++j) { // oszlopok
+                
+                int élők = szomszédokSzáma(rácsElőtte, i, j, ÉLŐ);
+                
+                if(rácsElőtte[i][j] == ÉLŐ) {
+                /* Élő élő marad, ha kettő vagy három élő
+                 szomszedja van, különben halott lesz. */
+                    if(élők==2 || élők==3)
+                        rácsUtána[i][j] = ÉLŐ;
+                    else
+                        rácsUtána[i][j] = HALOTT;
+                }  else {
+                /* Halott halott marad, ha három élő
+                 szomszedja van, különben élő lesz. */
+                    if(élők==3)
+                        rácsUtána[i][j] = ÉLŐ;
+                    else
+                        rácsUtána[i][j] = HALOTT;
+                }
+            }
+        }
+        rácsIndex = (rácsIndex+1)%2;
+    }
+}]]></programlisting>
+
+
+
+    <para>
+        A sejtek összessége a sikló. Adott irányba halad,és  lemásolja önmagát.
+
+    </para>
+                <programlisting language="java"><![CDATA[
+public void sikló(boolean [][] rács, int x, int y) {
+        
+        rács[y+ 0][x+ 2] = ÉLŐ;
+        rács[y+ 1][x+ 1] = ÉLŐ;
+        rács[y+ 2][x+ 1] = ÉLŐ;
+        rács[y+ 2][x+ 2] = ÉLŐ;
+        rács[y+ 2][x+ 3] = ÉLŐ;
+        
+    }]]></programlisting>
+    <para>
+    A sikló ágyú bizonyos iránybalövöldözi a többi siklót. Az x és y érték a bal felso sarkának határoló élei.
+</para>
+    <programlisting language="java"><![CDATA[
+        
+public void siklóKilövő(boolean [][] rács, int x, int y) {
+        
+        rács[y+ 6][x+ 0] = ÉLŐ;
+        rács[y+ 6][x+ 1] = ÉLŐ;
+        rács[y+ 7][x+ 0] = ÉLŐ;
+        rács[y+ 7][x+ 1] = ÉLŐ;
+        
+        rács[y+ 3][x+ 13] = ÉLŐ;
+        
+        rács[y+ 4][x+ 12] = ÉLŐ;
+        rács[y+ 4][x+ 14] = ÉLŐ;
+        
+        rács[y+ 5][x+ 11] = ÉLŐ;
+        rács[y+ 5][x+ 15] = ÉLŐ;
+        rács[y+ 5][x+ 16] = ÉLŐ;
+        rács[y+ 5][x+ 25] = ÉLŐ;
+        
+        rács[y+ 6][x+ 11] = ÉLŐ;
+        rács[y+ 6][x+ 15] = ÉLŐ;
+        rács[y+ 6][x+ 16] = ÉLŐ;
+        rács[y+ 6][x+ 22] = ÉLŐ;
+        rács[y+ 6][x+ 23] = ÉLŐ;
+        rács[y+ 6][x+ 24] = ÉLŐ;
+        rács[y+ 6][x+ 25] = ÉLŐ;
+        
+        rács[y+ 7][x+ 11] = ÉLŐ;
+        rács[y+ 7][x+ 15] = ÉLŐ;
+        rács[y+ 7][x+ 16] = ÉLŐ;
+        rács[y+ 7][x+ 21] = ÉLŐ;
+        rács[y+ 7][x+ 22] = ÉLŐ;
+        rács[y+ 7][x+ 23] = ÉLŐ;
+        rács[y+ 7][x+ 24] = ÉLŐ;
+        
+        rács[y+ 8][x+ 12] = ÉLŐ;
+        rács[y+ 8][x+ 14] = ÉLŐ;
+        rács[y+ 8][x+ 21] = ÉLŐ;
+        rács[y+ 8][x+ 24] = ÉLŐ;
+        rács[y+ 8][x+ 34] = ÉLŐ;
+        rács[y+ 8][x+ 35] = ÉLŐ;
+        
+        rács[y+ 9][x+ 13] = ÉLŐ;
+        rács[y+ 9][x+ 21] = ÉLŐ;
+        rács[y+ 9][x+ 22] = ÉLŐ;
+        rács[y+ 9][x+ 23] = ÉLŐ;
+        rács[y+ 9][x+ 24] = ÉLŐ;
+        rács[y+ 9][x+ 34] = ÉLŐ;
+        rács[y+ 9][x+ 35] = ÉLŐ;
+        
+        rács[y+ 10][x+ 22] = ÉLŐ;
+        rács[y+ 10][x+ 23] = ÉLŐ;
+        rács[y+ 10][x+ 24] = ÉLŐ;
+        rács[y+ 10][x+ 25] = ÉLŐ;
+        
+        rács[y+ 11][x+ 25] = ÉLŐ;
+        
+    }]]></programlisting>
+
+
+                    <programlisting language="java"><![CDATA[
+ public static void main(String[] args) {
+        new Sejtautomata(100, 75);
+    }
+}       
+        
+    }]]></programlisting>
+
+    <para>
+        Fordításkor,java fordítót használunk.
+    </para>
+  
+
+     <para>Ha megnyomjuk az S-t akkor készül egy felvétel a sejttéről.N-el mő, K-val pedig csökken a sejtméret.A G gyorsít az i pedig lassít.
+     
+     </para>
+    </section>
+    
+    
+    <section>
+        <title>Qt C++ életjáték</title>
+        <para>
+            Most Qt C++-ban!
+        </para>
+        <para>
+            Megoldás videó: 
+        </para>
+        <para>
+            A szabály ugyanúgy működik mint javaban:
+        </para>
+        <programlisting language="c++"><![CDATA[
+void SejtSzal::idoFejlodes() {
+    bool **racsElotte = racsok[racsIndex];
+    bool **racsUtana = racsok[(racsIndex+1)%2];
+    for(int i=0; i<magassag; ++i) { // sorok
+        for(int j=0; j<szelesseg; ++j) { // oszlopok
+            int elok = szomszedokSzama(racsElotte, i, j, SejtAblak::ELO);
+            if(racsElotte[i][j] == SejtAblak::ELO) {
+                
+                if(elok==2 || elok==3)
+                    racsUtana[i][j] = SejtAblak::ELO;
+                else
+                    racsUtana[i][j] = SejtAblak::HALOTT;
+            }  else {
+               
+                if(elok==3)
+                    racsUtana[i][j] = SejtAblak::ELO;
+                else
+                    racsUtana[i][j] = SejtAblak::HALOTT;
+            }
+        }
+    }
+    racsIndex = (racsIndex+1)%2;
+}
+]]></programlisting> 
+<para>Sikló:</para>   
+         <programlisting language="c++"><![CDATA[
+void SejtAblak::siklo(bool **racs, int x, int y) {
+  
+  racs[y+ 0][x+ 2] = ELO;
+  racs[y+ 1][x+ 1] = ELO;
+  racs[y+ 2][x+ 1] = ELO;
+  racs[y+ 2][x+ 2] = ELO;
+  racs[y+ 2][x+ 3] = ELO;
+  
+}
+]]></programlisting> 
+    <para>Siklókilövő</para>
+      <programlisting language="c++"><![CDATA[
+void SejtAblak::sikloKilovo(bool **racs, int x, int y) {
+  
+  racs[y+ 6][x+ 0] = ELO;
+  racs[y+ 6][x+ 1] = ELO;
+  racs[y+ 7][x+ 0] = ELO;
+  racs[y+ 7][x+ 1] = ELO;
+  
+  racs[y+ 3][x+ 13] = ELO;
+  
+  racs[y+ 4][x+ 12] = ELO;
+  racs[y+ 4][x+ 14] = ELO;
+  
+  racs[y+ 5][x+ 11] = ELO;
+  racs[y+ 5][x+ 15] = ELO;
+  racs[y+ 5][x+ 16] = ELO;
+  racs[y+ 5][x+ 25] = ELO;
+  
+  racs[y+ 6][x+ 11] = ELO;
+  racs[y+ 6][x+ 15] = ELO;
+  racs[y+ 6][x+ 16] = ELO;
+  racs[y+ 6][x+ 22] = ELO;
+  racs[y+ 6][x+ 23] = ELO;
+  racs[y+ 6][x+ 24] = ELO;
+  racs[y+ 6][x+ 25] = ELO;
+  
+  racs[y+ 7][x+ 11] = ELO;
+  racs[y+ 7][x+ 15] = ELO;
+  racs[y+ 7][x+ 16] = ELO;
+  racs[y+ 7][x+ 21] = ELO;
+  racs[y+ 7][x+ 22] = ELO;
+  racs[y+ 7][x+ 23] = ELO;
+  racs[y+ 7][x+ 24] = ELO;
+  
+  racs[y+ 8][x+ 12] = ELO;
+  racs[y+ 8][x+ 14] = ELO;
+  racs[y+ 8][x+ 21] = ELO;
+  racs[y+ 8][x+ 24] = ELO;
+  racs[y+ 8][x+ 34] = ELO;
+  racs[y+ 8][x+ 35] = ELO;
+  
+  racs[y+ 9][x+ 13] = ELO;
+  racs[y+ 9][x+ 21] = ELO;
+  racs[y+ 9][x+ 22] = ELO;
+  racs[y+ 9][x+ 23] = ELO;
+  racs[y+ 9][x+ 24] = ELO;
+  racs[y+ 9][x+ 34] = ELO;
+  racs[y+ 9][x+ 35] = ELO;
+  
+  racs[y+ 10][x+ 22] = ELO;
+  racs[y+ 10][x+ 23] = ELO;
+  racs[y+ 10][x+ 24] = ELO;
+  racs[y+ 10][x+ 25] = ELO;
+  
+  racs[y+ 11][x+ 25] = ELO;
+  
+}
+]]></programlisting> 
+<programlisting language="c++"><![CDATA[
+#include <QApplication>
+#include "sejtablak.h"
+#include <QDesktopWidget>
+int main(int argc, char *argv[])
+{
+  QApplication a(argc, argv);
+  SejtAblak w(100, 75);
+  w.show();
+  
+  return a.exec();
+}
+]]></programlisting> 
+
+    <para>C++-nál használmi kell a QT-t, ezért fordításkor először Qmake -project , ez majd legenerálja a -pro fájlt és ezután még alkalmaznom kell egy make-et. A futtatás menete ugyanaz mit Javaban
+        
+    </para>
+   
+          
+
+    </section>    
+    
+    <section>
+        <title>BrainB Benchmark</title>
+      
+ 
+        <para>
+            A program azért íródott hogy a karakterek mozgása követését figyeljék meg e sportolókon. A Samu Entropy 
+            dobozon belül, a mozgó körben  kell tartani az egérmutatót és eközben újabb dobozok is megjelennek hogy összezavarjanak. Ha 1 másodpercet meghaladja az az idő amikor az egérmutató a körön kívül van akkor romlik az eredmény és a dooboz mozgása lassul.
+    
+        </para> 
+        <para>Fordításkor az OpenCv könyvtárat használjuk.</para>
+    
+      <mediaobject>
+    <imageobject>
+            <imagedata fileref="brainb2.png" scale="40" />
+            </imageobject>
+     </mediaobject>
+   
+     <para>A mérés 10 percig tart és statisztika is készül a teljesítményről, amit a program könyvtárában egy txt fájlban találunk.   
+         </para>
+     
+ </section>
+</chapter> 

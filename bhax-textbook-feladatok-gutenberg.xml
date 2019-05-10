@@ -1,0 +1,88 @@
+<chapter xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xi="http://www.w3.org/2001/XInclude" version="5.0" xml:lang="hu">
+    <info>
+        <title>Helló, Gutenberg!</title>
+        <keywordset>
+            <keyword/>
+        </keywordset>
+        <cover>
+            <para>
+                Programozás tankönyvek rövid olvasónaplói.
+            </para>
+        </cover>
+    </info>
+    <section>
+        <title>Programozási alapfogalmak</title>     
+        <para>Juhász István - Magas szintű programozási nyelvek 1</para>   
+  
+        <para>Az informatikában léteznek különböző dekleratív és imperatív nyelvek. Az imperatív nyelvekben a legfontosabb a változó melyeket különböző algoritmusokban használunk fel.Nagyon meghatározó szempuntjukból a Neumann-architektúra. A deklaratív nyelveknek nincs igazán meghatározott közös jellemzőjük,de nem algoritmikusak.
+        </para>
+        <para>
+              Karakterkészlet 
+        </para>
+          <para>A programok mindig karakterekből állnak ezért érdemes ha ismerjük a karakterkészletünket, azaz hogy milyen karakterekkel dolgozhatunk.A karakterek 3 fő csoportja a betűk a számok és az egyéb karakterek.
+        </para>
+          <para>
+               Adattípusok
+        </para>
+          <para>
+               Minden adattípusnak kell rendelkezni névvel és azonosítóval, hogy el lehessen róla mondani hogy egy adattípus.VAnnak programnyelvek ,amelyek ismerik a típusokat és vannak amelyek nem ,így különböztetünk meg típusos és nem típusos nyelveket. Vannak olyan nyelvek melyek engedélyezik a saját adattípus megadását, ekkor meg kell adnunk a tartományát a műveleteit és a reprezentációját.
+           </para>
+          <para>
+               Kifejezések
+        </para>
+          <para>
+               A kifejezések olyan szintaktikai eszközök amelyek operandusokból operátorokból és kerek zárójelekből állnak.
+               Az operandus lehet literál, konstans, változó vagy függvényhívás. Az operátorok műveleti jelek. A kerek zárójelek a műveletek végrehajtási sorrendjét befojásolják, rendundásan alkalmazhatóak.
+        </para>
+          <para>
+               Utasítások
+        </para>
+          <para>
+               Az utasítások segítségével meg tudjuk adni az alggoritmusk egyes részeit és még a tárgyprogramok is ezek segítségével készülnek. Rengeteg utasítás létezik melyeket 9 nagyobb csoportra osztunk ( értékadó utasítás,üres, ugró, elágazó, ciklusszervező, hívó, vezérlésátadó,I/O utasítások és más utasítások) 
+        </para>
+          <para>
+               A programok szerkezete
+        </para>
+       <para>
+               Egy program szövege programegységekből áll. Van olyan nyelv hogy egy programot programegységenként kell fordítanunk de vn olyan is amelyben magá a kész programot egyben kell fordítanunk
+               Vannak különböző alprogramuk is .A leghasznosabbnak és a leggyakrabban alkalmazottnak akkor bizonyulnak amikor egy egy hosszabb programban egy adott programrész többször ismétlődik. Ha alprogramban írjuk ezt a részt elég egyszer megírnunk és nem kell többször a ködba gépelni.
+             Az alprogramnak két fajtája van: eljárás és függvény. Az eljárássaleredményt kapunk amelyet fel tudunk használni,de a függvény csak egy értéket ad vissza. 
+        </para>
+          <para>
+              A folyamatot mikor az alprogram hívásánál egymáshoz rendelődnek a formális és aktuális paraméterek paraméterkiértékelésnek nevezzük.
+              A blokk olyan programegység amely egy másik programegységbe van beágyazva. A blokknak nincs paramétere és bárhol elhelyezhető.
+        </para>
+   
+       
+
+    </section>        
+    <section>
+        <title>Programozás bevezetés</title>
+        <para>                
+            <citation>KERNIGHANRITCHIE</citation>
+        </para>
+        <para>
+            Megoldás videó: <link xlink:href="https://youtu.be/zmfT9miB-jY">https://youtu.be/zmfT9miB-jY</link>
+        </para> 
+         <para>Vezérlési szerkezetek</para>
+            <para> Egy kifejezés akkor válik utasítássá ha pontosvessző követi.A Kerighanritchie könyv vezérlési szerkezetek fejezete föként utasítás elemzéssel és értelmezéssel foglalkozik.
+            Az if-else utasítást valamilyen választás vagy döntés leírására használhatjuk.Van amikor ez az utasítás az else ág nélkül is helyesen működik,de erre oda kell figyelnünk mert hiányzó else ág esetén nem tudni hogy a meglévő else ág melyik ifhez tartozik.Ennek párja az else-if, mellyel többszörös választást, döntédt írhatunk le.
+            A switch utasítás is a többirányú programelágaztatás egyik eszköze, mely egy kifejezés értékét hasonlitja több állandó értékű kifejezéshez.Ha ki szeretnénk lépni a switch utasításból csak alkalmaznunk kell a break utasítást.
+            A while és for utasításokat ciklusokban használjuk. A while működési elve hogy egy kifejezést ciklikusan addig értékel ki amíg az nullává nem válik.A for utasítás is hasonlóan működik,de itt nem 1 hanem 3 kifejezésünk van. Az első és a harmadik általában függvényhívás és a második egy relációs kifejezés. Ha a kifejezéseket elhagyjuk és csak a pontos vesszőket írjuk ki a for ciklusban egy végtelen ciklust hozunk létre.
+            A do-while utasításban a kifejezés kiértékelése a ciklustörzs végrehajtása után történik,tehát egyszer biztod végrehatódik a törzs.
+            A break utasításról már volt szó, a legfontosabb jellemzóje ,hogy lehetővé teszi hogy egy ciklust a befejezése előtt elhagyjunk.
+            A goto utasítás egy megadott címre ugorhatunk.Leggyakoribb használata az anikor egymásba épülő ciklusok vannak a kódban és valamelyik ciklust ki szeretném hagyni de nem akarom törölni.
+            </para>     
+            
+    </section>        
+    <section>
+        <title>Programozás</title>
+        <para>                
+            <citation>BMECPP</citation>
+        </para>
+        <para> A C++ nem objektumorientált tulajdonságai</para>
+        <para> A C nyelvet továbbfejlesztették annak érdekében, hogy kényelmesebb és biztonságosabb legyen a használata és így jött létre a C++ programozási nyelv.Az első fontos különbség a paraméterek értelmezése C++ban a void függvény üres paraméterlistát jelent még a C nyelvben ez azt jelentené hogy a függvény nem rendelkezik paraméterrel.A C++ -ban bevezették a bool típust ami nagyon hasznos tud lenni kiértékelések esetén. A C-ben ez a típus nem létezik. C nyelvben egy függvényt csaupán a neve azonosítja mé C++ ban a neve és az argumentumlistája, ezért C++-ban már létrehozható több ugyanolyan nevű függvény is. Ez a funkció hosszabb kódoknál nagyon hasznos lehet.C++ban a A címszerinti paraméterátadás abban változott hogy a paraméter deklarációjában csak egy jelet kell írnunk a paraméter elé.
+
+        </para>
+    </section>        
+</chapter> 

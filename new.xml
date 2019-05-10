@@ -1,0 +1,26 @@
+<para>
+            A feladatom egy decimális ,azaz tízes számrendszerből egy unáris, azaz egyes számrendszerbe váltó gép írása.
+            Az unáris a legegysezreűbb számrendszer amely a természetes számok ábrázolására szolgál. A célja hogy egy szám beírása után annyi vonal jelenjen meg amennyi maga a szám értéke.
+            A következő Turing gépben a vonalak helyett 1-esek fognak megjelenni. Működési elve hogy a számok beolvasása után ha talál egyenlőségjelet akkor az előtte lévő számból kivon 1-et, amíg az 0 nem lesz. Minden kivont 1-es után kiír egy vonalat (esetünkben egy 1-est). A végső sorozatban az egyesek számának pontosan meg kell egyezni a a megadott szám értékével.Az itt látható programban minden 5 darab 1-es után szóköz jelenik meg de ez nem számít egy kivont értéknek.
+        </para>
+    
+        <programlisting language="c++"><![CDATA[
+#include <iostream>
+using namespace std;
+int main() {
+    int szam;
+    int szamlalo = 0;
+    
+    cout << "Adj meg egy számot!\n";
+    cin >> szam;
+    cout << "Unáris számrendszerben:\n";
+    
+    for(int i = 0; i < szam; ++i) {
+        cout << "1";
+        ++szamlalo;
+        if(szamlalo%5 == 0)
+            cout << " ";
+    }
+    cout << '\n';
+    return 0;
+}
